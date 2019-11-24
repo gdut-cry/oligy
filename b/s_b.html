@@ -9,6 +9,7 @@
 <script src="jquery.mobile-1.4.0.min.js"></script>
 <!--最佳化屏幕宽度-->
 <link rel="stylesheet" href="css/css.css"/>
+<script src="animate.js"></script>
     <script src="js/jquery1.0.0.1.js"></script>
     <script src="js/js.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=0.2">
@@ -29,12 +30,16 @@
 	margin-left:37%;
 	border:1px solid#C00;
 	border-radius:0px;
-	margin-right:37%;
+	margin-right:39%;
+}
+.background{
+  background-color:#B9D1E1;	
 }
         .box {
             width: 362px;
             height: 408px;
-            margin:100px;
+			margin-top:100px;
+            margin-left:380px;
             border: 1px solid #ccc;
             position: relative;
         }
@@ -63,8 +68,7 @@
         }
         .img1 {
             vertical-align: top;
-        }
-		
+        }		
 </style>
     <script>
         function f1() {
@@ -121,15 +125,12 @@
     </script>
 </head>
 <body>
-<div data-role="page" data-title="我的网页" id="first">
-		<div data-role="header">
-			<h2>我的网页</h2>
-		</div>
-        <div data-role="content" id="content">
+<div class="background">
+
         <div class="d">
 		 <video class="vedio" src="WzZEPvCh_1368133000_hd.mp4" controls>浏览器不支持video标签</video></div>
         <div class="d song">
-         <img src="cd.png" width="52" height="52"/>
+         <img src="cd.png" width="55" height="59"/>
          <audio  src="心跳呼吸正常.mp3" controls>浏览器不支持audio标签</audio>
         </div>
         
@@ -143,7 +144,7 @@
             <img src="images/00.png" alt=""/>
         </div>
         </div>
-        </br></br></br></br>
+        </br></br>
         <div class="wrap" id="wrap">
           <div class="slide" id="slide">
             <ul>
@@ -161,12 +162,7 @@
            </div>
           </div>
          </div>
-         </div>
-         </br></br></br></br></br></br></br>
-		<div data-role="footer">
-				<h6><a href="s_b2.html" target="_blank">下一页</a></h6>		
-		</div>
-		</div>
-	<!--第二页-->
+	<button><a href="s_b2.html" target="_blank">下一页</a></button>			
+</div>  
 </body>
 </html>
