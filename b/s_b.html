@@ -36,18 +36,18 @@
 	margin-right:38%;
 }
         .box {
-            width: 350px;
-            height: 350px;
+            width: 362px;
+            height: 408px;
             margin:100px;
             border: 1px solid #ccc;
             position: relative;
         }
         .big {
             width: 400px;
-            height: 400px;
+            height:400px;
             position: absolute;
             top: 0;
-            left: 360px;
+            left: 450px;
             border: 1px solid #ccc;
             overflow: hidden;
             display: none;
@@ -65,13 +65,14 @@
         .small {
             position: relative;
         }
-        img {
+        .img1 {
             vertical-align: top;
         }
+		
 </style>
     <script>
-        
-        window.onload = function () {
+        function f1() {
+        // window.onload = function () {
 
             var box = document.getElementsByClassName("box")[0];
             var small = box.firstElementChild || box.firstChild;
@@ -128,6 +129,7 @@
 		<div data-role="header">
 			<h2>我的网页</h2>
 		</div>
+        <div data-role="content">
         <div class="d">
 		 <video class="vedio" src="WzZEPvCh_1368133000_hd.mp4" controls>浏览器不支持video标签</video></div>
         <div class="d song">
@@ -139,6 +141,7 @@
         <div class="small">
             <img src="images/0.png" alt=""/>
             <div class="mask"></div>
+            <button onclick="f1()">放大镜</button>
         </div>
         <div class="big">
             <img src="images/00.png" alt=""/>
@@ -162,9 +165,10 @@
            </div>
           </div>
          </div>
+         </div>
          </br></br></br></br></br></br></br>
 		<div data-role="footer">
-				<h6><a href="https://gdut-cry.github.io/oligy/d/s_4.html">下一页</a></h6>		
+				<h6><a href="s_b2.html" target="_blank">下一页</a></h6>		
 		</div>
 		</div>
 	<!--第二页-->

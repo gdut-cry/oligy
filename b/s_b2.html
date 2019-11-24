@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第二页</title>
+<style type="text/css">
+body{margin:0px;
+     padding:0px;
+	 }
+.d{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	z-index:-1;
+}
+</style>
+</head>
+
+<body>
+<div class="d"><img src="images/2.png" width="100%" height="100%"/></div>
+<img id="box" src="images/small.png" style="cursor: pointer;border: 1px solid #ccc;"/>
+<script>
+    //window.onload页面加载完毕以后再执行此代码
+    window.onload = function () {
+        //需求：鼠标放到img上，修改路径（src的值）。
+        //步骤：
+        //1.获取事件源
+        //2.绑定事件
+        //3.书写事件驱动程序
+
+        //1.获取事件源
+        var img = document.getElementById("box");
+        //2.绑定事件(悬停事件：鼠标进入到事件源中立即出发事件)
+        img.onmouseover = function () {
+            //3.书写事件驱动程序(修改src)
+            img.src = "images/big.pn" +
+                "g";
+//                this.src = "image/jd2.png";
+        }
+
+
+        //1.获取事件源
+        var img = document.getElementById("box");
+        //2.绑定事件(悬停事件：鼠标进入到事件源中立即出发事件)
+        img.onmouseout = function () {
+            //3.书写事件驱动程序(修改src)
+            this.src = "images/small.png";
+        }
+
+    }
+</script>
+</body>
+</html>
