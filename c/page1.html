@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>页面一</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+.d{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	z-index:-1;
+}
+.box{
+	width: 100%;
+    height: 70px;
+    position: relative;
+	background-color:#2D77B4;
+}
+ul{
+	
+	list-style: none;
+    position: relative;
+}
+li{
+	color:#FFF;
+	float: left;
+    margin-left:20px;
+	padding-top:12px;
+    text-align: center;
+    font: 900 20px/42px "simsun";
+    cursor: pointer;
+	position:relative;
+}
+li p{
+	margin-left:30px;
+	margin-right:30px;
+}
+.ai{
+    color:#FFF;
+}
+.ai:hover{
+	color:#999;
+}
+a{
+  text-decoration-line: none;
+}
+.inside { display:none; }                 /* inside初始不可见 */
+a:hover .inside, li:hover .inside           /* 鼠标指向a元素时inside可见 */
+            { display:block; background:#2D77B4;}
+.dd{
+	margin-top:10%;
+	margin-left:70%;
+}
+input{
+margin-top:5px;	
+}
+.button{
+	margin-left:17%;
+}
+</style>
+<script language="JavaScript" type="text/javascript">
+function display() {
+    DispWin = window.open('','NewWin', 'toolbar=no,status=no,width=300,height=200')
+    message = "<ul><li><b>学号: </b>" + document.form1.yourname.value;
+    message += "<li><b>密码: </b>" + document.form1.address.value;
+    message += "<li><b>邮箱: </b>" + document.form1.phone.value + "</ul>";
+    DispWin.document.write(message);
+}
+</script>
+</head>
+
+<body>
+<div class="d"><img src="images/6.png" width="100%" height="100%"/></div>
+    <div class="box">
+        <ul>
+            <li><p><font size="6" >广东工业大学计算机学院</font></p></li>
+            <li>首页新闻</li>
+            <li>学校概况</li>
+            <li>本科教育</li>
+            <li>科学研究</li>
+            <li>学科建设</li>
+            <li>学生工作</li>
+            <li>实验中心</li>
+            <li>资料下载</li>
+            <li><a class="ai" href="#">更多
+                <ul class="inside">
+                  <a class="ai" href="page2.html" target="_blank">分页面二</a><br />
+                  <a class="ai" href="#">其他学院</a><br />
+                  <a class="ai" href="#">教务系统</a><br /> 
+               <ul>
+              </a></li>
+        </ul>
+    </div>
+    <div class="dd">
+<form name="form1">
+<p><b>学号</b> <input TYPE="TEXT" SIZE="20" NAME="yourname">
+</p>
+<p><b>密码</b> <input TYPE="TEXT" SIZE="20" NAME="address">
+</p>
+<p><b>邮箱</b> <input TYPE="TEXT" SIZE="20" NAME="phone">
+</p>
+<p ><input class="button" TYPE="BUTTON" VALUE=" &nbsp;登陆&nbsp; " onClick="display();"></p>
+</form></div>
+</body>
+</html>

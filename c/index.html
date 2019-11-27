@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>计算机学院</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+	list-style:none; 
+	border:0;
+}
+.d{
+ 	text-align:center;
+}
+.book .bookname ul li{
+	text-align:center;
+}
+.box{
+	margin:0 auto;
+	width: 999px;
+    height: 45px;
+    position: relative;
+	background-color:#4F72CE;
+}
+ul{
+	
+	list-style: none;
+    position: relative;
+}
+.lii{
+	float: left;
+    text-align: center;
+    font: 900 15px"simsun";
+    cursor: pointer;
+	position:relative;
+	color:#FFF;
+	margin-top:10px;
+	margin-left:45px;
+}
+.ai{
+    color:#FFF;
+}
+a{
+    text-decoration-line: none;
+}
+.ai:hover{
+	color:#999;
+}
+
+
+        .all{
+            width:999px;
+            height:300px;
+          
+            margin:0px auto;
+            position:relative;
+        }
+        .screen{
+            width:999px;
+            height:300px;
+            overflow:hidden;
+            position:relative;
+        }
+        .screen li{ width:999px; height:300px; overflow:hidden; float:left;}
+        .screen ul{ position:absolute; left:0; top:0px; width:5994px;}
+        .all ol{ position:absolute; right:10px; bottom:10px; line-height:20px; text-align:center;}
+        .all ol li{ float:left; width:20px; height:20px; background:#fff; border:1px solid #ccc; margin-left:10px; cursor:pointer;}
+        .all ol li.current{ background:yellow;}
+		
+		
+		
+		        .book {
+            height: 130px;
+			width:999px;
+			margin:0 auto;
+        }
+        .bookname {
+            height: 130px;
+            width: 120px;
+            float: left;
+            background-color:#E8E8E8;
+        }
+        .bookname li{
+            list-style: none;
+            height: 30px;
+            font-size: 17px;
+            margin-top: 2px;
+			font-family:"simsun";
+         }
+        .bookname li a {
+            color: #337BBD;
+			font-weight:800;
+        }
+        .bookcontent {
+            height: 130px;
+            width: 879px;
+            margin-left: 120px;
+            background-color:#F1F1F1;
+            color: #000;
+            font-size: 15px;
+			font-family:"simsun";
+        }
+        .bookcontent p {
+            padding-top: 20px;
+        }
+.foot{
+    margin:0 auto;
+	width: 999px;
+    height: 100px;
+	background-color:#FFF;	
+	padding-top:0;
+	text-align:center;
+}
+.img1{
+	padding-left:2%;
+}
+.img2{
+	padding-left:0%;
+}
+</style>
+    <script>
+         function a() {
+
+            //需求：无缝滚动。
+            //思路：赋值第一张图片放到ul的最后，然后当图片切换到第五张的时候
+            //     直接切换第六章，再次从第一张切换到第二张的时候先瞬间切换到
+            //     第一张图片，然后滑动到第二张
+            //步骤：
+            //1.获取事件源及相关元素。（老三步）
+            //2.复制第一张图片所在的li,添加到ul的最后面。
+            //3.给ol中添加li，ul中的个数-1个，并点亮第一个按钮。
+            //4.鼠标放到ol的li上切换图片
+            //5.添加定时器
+            //6.左右切换图片（鼠标放上去隐藏，移开显示）
+
+
+            //1.获取事件源及相关元素。（老三步）
+            var all = document.getElementById("all");
+            var screen = all.firstElementChild || all.firstChild;
+            var imgWidth = screen.offsetWidth;
+            var ul = screen.firstElementChild || screen.firstChild;
+            var ol = screen.children[1];
+            var div = screen.lastElementChild || screen.lastChild;
+            var spanArr = div.children;
+
+            //2.复制第一张图片所在的li,添加到ul的最后面。
+            var ulNewLi = ul.children[0].cloneNode(true);
+            ul.appendChild(ulNewLi);
+            //3.给ol中添加li，ul中的个数-1个，并点亮第一个按钮。
+            for(var i=0;i<ul.children.length-1;i++){
+                var olNewLi = document.createElement("li");
+                olNewLi.innerHTML = i+1;
+                ol.appendChild(olNewLi)
+            }
+            var olLiArr = ol.children;
+            olLiArr[0].className = "current";
+
+            //4.鼠标放到ol的li上切换图片
+            for(var i=0;i<olLiArr.length;i++){
+                //自定义属性，把索引值绑定到元素的index属性上
+                olLiArr[i].index = i;
+                olLiArr[i].onmouseover = function () {
+                    //排他思想
+                    for(var j=0;j<olLiArr.length;j++){
+                        olLiArr[j].className = "";
+                    }
+                    this.className = "current";
+                    //鼠标放到小的方块上的时候索引值和key以及square同步
+//                    key = this.index;
+//                    square = this.index;
+                    key = square = this.index;
+                    //移动盒子
+                    animate(ul,-this.index*imgWidth);
+                }
+            }
+            
+            //5.添加定时器
+            var timer = setInterval(autoPlay,3000);
+
+            //固定向右切换图片
+            //两个定时器（一个记录图片，一个记录小方块）
+            var key = 0;
+            var square = 0;
+            function autoPlay(){
+                //通过控制key的自增来模拟图片的索引值，然后移动ul
+                key++;
+                if(key>olLiArr.length){
+                    //图片已经滑动到最后一张，接下来，跳转到第一张，然后在滑动到第二张
+                    ul.style.left = 0;
+                    key = 1;
+                }
+                animate(ul,-key*imgWidth);
+                //通过控制square的自增来模拟小方块的索引值，然后点亮盒子
+                //排他思想做小方块
+                square++;
+                if(square>olLiArr.length-1){//索引值不能大于等于5，如果等于5，立刻变为0；
+                    square = 0;
+                }
+                for(var i=0;i<olLiArr.length;i++){
+                    olLiArr[i].className = "";
+                }
+                olLiArr[square].className = "current";
+            }
+
+            //鼠标放上去清除定时器，移开后在开启定时器
+            all.onmouseover = function () {
+                div.style.display = "block";
+                clearInterval(timer);
+            }
+            all.onmouseout = function () {
+                div.style.display = "none";
+                timer = setInterval(autoPlay,3000);
+            }
+			            function animate(ele,target){
+                clearInterval(ele.timer);
+                var speed = target>ele.offsetLeft?10:-10;
+                ele.timer = setInterval(function () {
+                    var val = target - ele.offsetLeft;
+                    ele.style.left = ele.offsetLeft + speed + "px";
+                    if(Math.abs(val)<Math.abs(speed)){
+                        ele.style.left = target + "px";
+                        clearInterval(ele.timer);
+                    }
+                },10)
+            }
+        }
+		
+		function addLoadEvent(fuc){
+		var oldonload=window.onload;
+   		if(typeof oldonload != 'function'){
+        	window.onload=fuc;
+   		}
+		else{
+        	window.onload=function(){
+           		oldonload();
+           	 	fuc();
+        	};
+    	};
+	};
+	
+	addLoadEvent(a);
+		
+    function b(){
+    function cleardesc() {
+        d = document.getElementById("description");
+        d.innerHTML = "";
+    }
+    function hover(e) {
+        if (!e) var e = window.event;
+        whichlink = (e.target) ? e.target.id : e.srcElement.id;
+        if (whichlink=="book1") desc = "&nbsp;&nbsp;计算机学院本科相关专业建设已有30多年的办学历史，涵盖计算机科学与技术、软件工程和信息安全三个学科。现有1个二级学科博士学位授权点，2个一级学科硕士学位授权点，2个工程硕士培养领域授权点；有1个广东省优势重点学科，1个省级名牌专业；拥有完整的从学士到博士的人才培养体系。学院下设计算机科学系、软件工程系、网络工程系、网络空间安全系、实验中心和学院办公室等六个机构。学院实施“以优势学科为依托，按专业大类打基础，循发展需求设方向，融创新实践育人才”的培养模式，致力于培养具有严谨科学精神、良好人文素养、宽厚学科基础、突出创新能力的高级技术人才。";
+        else if (whichlink=="book2") desc = "&nbsp;&nbsp;计算机科学围绕信息、知识、智能等主题迅速发展，主要包括（1）信息处理技术（2）知识科学（3）智能处理技术。计算机科学系重点建设两个方向：先进计算与智能信息处理。计算机科学系拥有一支肯于奉献，业务相对精干的教学科研队伍，教师目前有25位，其中教授5人，副教授6人，讲师14人。有博士学位的教师16人，有硕士学位的教师7人。";
+        else if (whichlink=="book3") desc = "&nbsp;&nbsp;软件工程系成立于2011年，现有教师23人，其中教授3人、副教授6人、讲师14人，具有博士学位教师12人，硕士研究生导师9人。本科“软件工程”专业从2002年开始招生，2013年入选教育部的“卓越工程师培养计划”，目前有1个校级重点学科“计算机软件与理论”，每年招收“卓越工程师”班、“软件开发技术”方向及“软件服务与安全”方向的本科生200人；研究生专业“计算机软件与理论”从2000年开始招生，工程硕士领域“软件工程”从2002年开始招生。";
+        else if (whichlink=="book4") desc = "&nbsp;&nbsp;网络工程系坚持以创新型人才培养为中心，培养厚基础、宽口径、强能力的高素质网络技术人才。";
+        d = document.getElementById("description");
+        d.innerHTML = desc;
+    }
+    b1link = document.getElementById("book1");
+    b1link.onmouseover=hover;
+    b1link.onmouseout=cleardesc;
+    b2ink = document.getElementById("book2");
+    b2ink.onmouseover=hover;
+    b2ink.onmouseout=cleardesc;
+    b3link = document.getElementById("book3");
+    b3link.onmouseover=hover;
+    b3link.onmouseout=cleardesc;
+    b4link = document.getElementById("book4");
+    b4link.onmouseover=hover;
+    b4link.onmouseout=cleardesc;
+	  }
+	 addLoadEvent(b); 
+	</script>
+</head>
+<body>
+<div class="d">
+    <img src="images/0.png" />
+    <div class="box">
+        <ul> 
+            <li class="lii">首页新闻</li>
+            <li class="lii">学校概况</li>
+            <li class="lii">本科教育</li>
+            <li class="lii">科学研究</li>
+            <li class="lii">学科建设</li>
+            <li class="lii">学生工作</li>
+            <li class="lii">实验中心</li>
+            <li class="lii">资料下载</li>
+            <li class="lii"><a class="ai" href="page1.html" target="_blank">分页面一</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="all" id='all'>
+    <div class="screen" id="screen">
+        <ul id="ul">
+            <li><img src="images/1.png" /></li>
+            <li><img src="images/2.png" /></li>
+            <li><img src="images/3.png" /></li>
+            <li><img src="images/4.png" /></li>
+            <li><img src="images/5.png" /></li>
+        </ul>
+        <ol>
+
+        </ol>
+    </div>
+</div>
+
+
+    <div class="book">
+        <div class="bookname">
+            <ul>
+                <li><a href="#" id="book1">学院简介</a>
+                <li><a href="#" id="book2">计算机科学系</a>
+                <li><a href="#" id="book3">软件工程系</a>
+                <li><a href="#" id="book4">网络工程系</a>
+            </ul>
+        </div>
+        <div class="bookcontent">
+            <p id="description"></p>
+        </div>
+    </div>
+    <div class="d">
+    <img class="img2" src="images/13.png" /> 
+    <img src="images/17.png" />
+    <img  class="img1" src="images/14.png" />
+    </div>
+    
+    <div class="d">
+    <img src="images/12.png" />
+    </div>
+<div class="foot">
+版权所有©2014 广东工业大学计算机学院 <br />
+广州市番禺区广州大学城外环西路100号 邮编:510006
+
+
+</div>
+</body>
+</html>
